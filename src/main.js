@@ -1,6 +1,7 @@
 // src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 import './assets/main.css'
 
 // 引入Element Plus
@@ -13,4 +14,5 @@ const app = createApp(App)
 
 
 app.use(ElementPlus,{locale: zhCn,})
+app.use(router)
 app.mount('#app')

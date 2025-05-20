@@ -1,33 +1,21 @@
 <!-- src/App.vue -->
 <template>
   <div class="app-container">
-    <component 
-      :is="currentComponent" 
-      @next-step="nextStep" 
-      @update-user-data="updateUserData"
+    <router-view 
       :userData="userData"
-    ></component>
+      @update-user-data="updateUserData"
+    ></router-view>
   </div>
 </template>
 
 <script>
 import { createClient } from '@supabase/supabase-js'
-import Welcome from './components/Welcome.vue'
-import Interview from './components/Interview.vue'
-import AcceptChallenge from './components/AcceptChallenge.vue'
-import CompleteChallenge from './components/CompleteChallenge.vue'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'App',
-  components: {
-    Welcome,
-    Interview,
-    AcceptChallenge,
-    CompleteChallenge
-  },
   data() {
     return {
-      currentStep: 1,
       userData: {
         githubId: '',
         email: '',
@@ -37,21 +25,7 @@ export default {
       supabase: null
     }
   },
-  computed: {
-    currentComponent() {
-      switch (this.currentStep) {
-        case 1: return 'Welcome'
-        case 2: return 'Interview'
-        case 3: return 'AcceptChallenge'
-        case 4: return 'CompleteChallenge'
-        default: return 'Welcome'
-      }
-    }
-  },
   methods: {
-    nextStep() {
-      this.currentStep++
-    },
     updateUserData(data) {
       this.userData = { ...this.userData, ...data }
     }
@@ -63,10 +37,11 @@ export default {
     this.supabase = createClient(supabaseUrl, supabaseKey)
   },
   mounted() {
-    // 欢迎页面2秒后自动进入下一页
-    if (this.currentStep === 1) {
+    const router = useRouter()
+    // 如果当前路径是 '/welcome' 或 '/'，2秒后跳转到 Interview 页面
+    if (this.$route.path === '/' || this.$route.path === '/welcome') {
       setTimeout(() => {
-        this.nextStep()
+        router.push('/interview')
       }, 2000)
     }
   }

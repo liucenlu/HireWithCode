@@ -2,7 +2,7 @@
 <template>
   <div class="interview-container">
     <div class="markdown-content" v-html="renderedContent"></div>
-    <button class="next-button" @click="$emit('next-step')">下一步</button>
+    <button class="next-button" @click="goToAcceptChallenge">下一步</button>
   </div>
 </template>
 
@@ -45,6 +45,11 @@ export default {
   computed: {
     renderedContent() {
       return marked(this.markdownContent)
+    }
+  },
+  methods: {
+    goToAcceptChallenge() {
+      this.$router.push('/accept-challenge')
     }
   }
 }

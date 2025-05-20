@@ -93,7 +93,7 @@ export default {
         if (error) throw error
         
         // 进入下一步
-        this.$emit('next-step')
+        this.$router.push('/complete-challenge')
       } catch (err) {
         this.error = err.message || '提交失败，请稍后重试'
         console.error('Error submitting form:', err)
