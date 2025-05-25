@@ -54,7 +54,7 @@ export default {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background-color: #f5f5f5;
   font-family: 'Arial', sans-serif;
   padding: 1rem;
@@ -65,6 +65,7 @@ export default {
   .app-container {
     padding: 0.5rem;
     align-items: center;
+    min-height: 100dvh; /* 使用动态视口高度 */
   }
 }
 </style>
