@@ -51,11 +51,20 @@ export default {
 <style>
 .app-container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: #f5f5f5;
   font-family: 'Arial', sans-serif;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0.5rem;
+    align-items: center;
+  }
 }
 </style>
